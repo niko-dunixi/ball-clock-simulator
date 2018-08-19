@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  SAM template to build and run a ball-clock-simulator as an
+  AWS lambda which we can invoke. In a world where Iaas and Faas
+  live together... why would we not?
+
+Resources:
+  BallClockSimulatorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: ball-clock-simulator-lambda.out
+      Runtime: go1.x
+      Timeout: 30
+      Events:
+        BallClockApi:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
