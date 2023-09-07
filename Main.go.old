@@ -1,3 +1,4 @@
+//go:build !aws
 // +build !aws
 
 package main
@@ -6,7 +7,8 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	. "github.com/paul-nelson-baker/ball-clock-simulator/support"
+
+	"github.com/niko-dunixi/ball-clock-simulator/support"
 )
 
 func main() {
@@ -26,7 +28,7 @@ func main() {
 				//If mode 1, calculate how many days before we reset
 				ballCount := userInputValues[0]
 				fmt.Println("Mode 1::Working with ballcount: " + strconv.Itoa(ballCount))
-				fmt.Print(CalculateDaysUntilResetString(ballCount))
+				fmt.Print(support.CalculateDaysUntilResetString(ballCount))
 			case 2:
 				// if mode 2, perform the number of iterations necessary
 				// and then print out the state of the clock
@@ -34,7 +36,7 @@ func main() {
 				iterations := userInputValues[1]
 				fmt.Println("Mode 2::Working with ballcount: " + strconv.Itoa(ballCount))
 				fmt.Println("Mode 2::Working with iterations: " + strconv.Itoa(iterations))
-				ballClock := NewBallClock(ballCount)
+				ballClock := support.NewBallClock(ballCount)
 				ballClock.TickMinutes(iterations)
 				fmt.Println(ballClock.JsonString())
 			}
@@ -44,5 +46,5 @@ func main() {
 }
 
 func getValidUserInputFromStdIn() ([]int, error) {
-	return GetValidUserInput(os.Stdin)
+	return support.GetValidUserInput(os.Stdin)
 }

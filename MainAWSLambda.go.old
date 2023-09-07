@@ -1,12 +1,14 @@
+//go:build aws
 // +build aws
 
 package main
 
 import (
-	. "github.com/paul-nelson-baker/ball-clock-simulator/support"
+	"encoding/json"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"encoding/json"
+	. "github.com/niko-dunixi/ball-clock-simulator/support"
 )
 
 type BallSimulationRequest struct {
